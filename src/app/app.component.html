@@ -1,0 +1,60 @@
+
+
+<!--Deixa tudo da págino no centro -->
+<div fxLayout="row" fxLayoutAlign="center start" fxLayoutGap="10px" >
+  <!--Deixa tudo da página um a baixo do outro -->
+<div class="container" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="10px">
+
+	
+  <form [formGroup]="service.form" (submit)="onSubmit()">
+    	<mat-card>
+        
+<!--Titulo lista de funcionarios -->
+			<mat-card-header>
+				<mat-card-title>
+					Lista de Funcionários
+				</mat-card-title>
+			</mat-card-header>
+
+<!--Campos de input -->
+     
+         <div fxLayout="column" >
+           <!--input type hidden serve para deixar oculto-->
+          <input formControlName="key" type="hidden">
+					<mat-form-field>
+						<input formControlName="nome" #input matInput placeholder="Nome" >
+          </mat-form-field>
+           <mat-form-field >
+          <input formControlName="funcao" #input matInput placeholder="Função">
+           </mat-form-field>
+        </div>
+  
+ <mat-card-actions>
+      <button  (click)="insertTodo() "type="submit" mat-raised-button color="primary">Adicionar</button>
+      <button (click)="editTodoList() " type="update" mat-raised-button color="primary">Atualizar</button>
+  </mat-card-actions>
+
+</mat-card>
+  </form>
+
+
+
+<br>
+
+<div fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="10px">
+<mat-card *ngFor="let todo of todoList">
+
+  <mat-card-header>
+    <mat-card-title>{{ todo.nome }}</mat-card-title>
+    <mat-card-subtitle>{{ todo.funcao }}</mat-card-subtitle>
+      <mat-card-subtitle>{{ todo.key }}</mat-card-subtitle>
+  </mat-card-header>
+
+    <mat-card-actions>
+      <button type="button" mat-raised-button color="primary" (click)="service.editTodoList(todo)">Editar</button>
+      <button type="button" mat-raised-button color="warn" (click)="service.deleteTodoList(todo.key)">Deletar</button>
+  </mat-card-actions>
+</mat-card>
+
+</div>
+</div>
